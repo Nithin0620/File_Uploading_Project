@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("Cloudinary").v2;
 require("dotenv").config();
 
 exports.cloudinaryConnect = ()=>{
