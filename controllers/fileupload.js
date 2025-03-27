@@ -92,6 +92,7 @@ exports.videoUpload = async (req,res) =>{
 
       const file = req.files.videoFile;
       console.log("Video file:", file);
+      console.log("yeh prit ho raha he?")
 
       const supportedFiles =["mp4" , "mov"];
       const fileType = file.name.split(".")[1].toLowerCase();
@@ -145,7 +146,7 @@ exports.imageSizeReducedUpload = async(req,res)=>{
          })
       }
 
-      const response = await uploadFiletoCloudinary(file,"Learning_FileUpload",90);
+      const response = await uploadFiletoCloudinary(file,"Learning_FileUpload",20);
 
 
       const fileData = await File.create({
