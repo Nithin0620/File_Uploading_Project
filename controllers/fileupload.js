@@ -76,10 +76,11 @@ exports.imageUpload = async(req,res)=>{
       })
 
    }
+
    catch(e){
       return res.status(400).json({
          success:false , 
-         message:"Sumething Went Wrong",
+         message:"Something Went Wrong",
       });
    }
 }
@@ -88,16 +89,13 @@ exports.imageUpload = async(req,res)=>{
 exports.videoUpload = async (req,res) =>{
    try{
       const {name,tags,email} = req.body;
-      console.log(name,tags,email);
 
       const file = req.files.videoFile;
-      console.log("Video file:", file);
-      console.log("yeh prit ho raha he?")
 
       const supportedFiles =["mp4" , "mov"];
       const fileType = file.name.split(".")[1].toLowerCase();
 
-      if(!await isFileSupported(fileType,supportedFiles)){
+      if(!isFileSupported(fileType,supportedFiles)){
          return res.status(400).json({
             success:false,
             message:"File Format not supported",
@@ -106,7 +104,7 @@ exports.videoUpload = async (req,res) =>{
 
       const response= await uploadFiletoCloudinary(file , "Learning_FileUpload");
 
-      const fileData = await File.create({
+      const fileData= File.create({
          name,
          tags,
          email,
@@ -139,14 +137,14 @@ exports.imageSizeReducedUpload = async(req,res)=>{
       const fileType = file.name.split(".")[1].toLowerCase();
       console.log("File Type:", fileType);
 
-      if(await !isFileSupported(fileType,supportedFiles)){
+      if(!isFileSupported(fileType,supportedFiles)){
          return res.status(400).json({
             success:false,
             message:"This file type is not supported",
          })
       }
 
-      const response = await uploadFiletoCloudinary(file,"Learning_FileUpload",20);
+      const response = await uploadFiletoCloudinary(file,"Learning_FileUpload",30);
 
 
       const fileData = await File.create({
